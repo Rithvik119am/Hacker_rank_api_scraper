@@ -25,7 +25,6 @@ def match_data(database,contest_board,name):
     with pd.ExcelWriter(name + '.xlsx') as writer:
         for branch_name, data in ans.groupby(branch):
             data.to_excel(writer, sheet_name=str(branch_name), index=False)
-    print(ans)
     
 
 def ans_finder(url):
@@ -40,7 +39,6 @@ def ans_finder(url):
         list: A list of JSONs containing the leaderboard data.
     """
     parsed_url = urlparse(url)
-    print(parsed_url.path)
     conn = http.client.HTTPSConnection("www.hackerrank.com")
     payload = ""
     headers = {
@@ -98,9 +96,9 @@ def pre_matcher(link,leb_df):
     """
     link= urlparse(link).path.split('/')[2].replace('-', '_')
     if link[0]=='2':
-        db="2nd Year BTech Coding Platform Details(1-678)"
+        db="data_file\\2nd Year BTech Coding Platform Details(1-678)"
     elif link[0]=='3':
-        db="3rd Year B. Tech Coding Platform Details(1-648)"
+        db="data_file\\3rd Year B. Tech Coding Platform Details(1-648)"
     match_data(db,leb_df,link)
     return link
 def linker(link):
